@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-PDF_FILE="docs/answer.pdf"
+PDF_FILE="theory/answer.pdf"
 
 if [ ! -f "$PDF_FILE" ]; then
   echo "❌ PDF file $PDF_FILE missing"

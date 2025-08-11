@@ -1,5 +1,14 @@
 # Assignment 1: C Programming Basics
 
+## Instructions
+1. Answer theory questions in `docs/answers.md`.
+2. Write code in the corresponding `src/` file for each programming task.
+3. Do not change file names — tests depend on them.
+4. Commit and push your changes to GitHub.
+5. Check the GitHub Actions tab to see if you passed the tests.
+
+---
+
 1. What is the purpose of the main() function in a C program? Explain its significance.
    
 2. Explain the difference between a variable declaration and a variable initialization in C.
@@ -20,4 +29,6 @@
     
 10. Write a C program to swap the values of two variables using a temporary variable.
 
+---
 **Deadline:** 23:59, Thursday, 21st Aug, 2025
+---

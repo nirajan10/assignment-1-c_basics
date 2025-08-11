@@ -2,8 +2,10 @@
 
 ## Instructions
 
-1. Answer theory questions in `docs/answers.md`.
-[Basic markdown syntax for formatting](https://www.markdownguide.org/basic-syntax/)
+1. Answer theory questions in `docs/answers.md`.<br>
+(If you’re new to Markdown, here’s a [Basic Markdown Syntax guide](https://www.markdownguide.org/basic-syntax/))
+
+    **OR** Upload a PDF containing all questions and answers in the docs/ folder (You can create a doc and convert it to PDF.)
 
 2. Write code in the corresponding `src/` file for each programming task.
 

@@ -13,8 +13,6 @@
 
 4. Commit and push your changes to GitHub.
 
-5. Check the GitHub Actions tab to see if you passed the tests.
-
 ---
 
 ## Questions

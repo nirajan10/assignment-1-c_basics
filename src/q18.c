@@ -1,0 +1,1 @@
+// Write a C expression that calculates the sum of the squares of three different numbers.

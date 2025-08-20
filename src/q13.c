@@ -1,0 +1,1 @@
+// Write a C expression that evaluates whether a number is divisible by both 2 and 3 (without using the modulus operator).

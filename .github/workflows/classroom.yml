@@ -1,9 +1,9 @@
 name: CI - Run tests
 
 on:
-  - push
-  - workflow_dispatch
-  - repository_dispatch
+  push:
+  workflow_dispatch:
+  repository_dispatch:
 
 permissions:
   checks: write
@@ -26,9 +26,23 @@ jobs:
       - name: Run shell test scripts
         run: |
           chmod +x tests/*.sh
-          ./tests/test_q3.sh
-          ./tests/test_q6.sh
-          ./tests/test_q8.sh
-          ./tests/test_q9.sh
+          ./tests/testq3.sh
+          ./tests/testq6.sh
+          ./tests/testq8.sh
+          ./tests/testq9.sh
           ./tests/testq10.sh
+          ./tests/testq11.sh
+          ./tests/testq12.sh
+          ./tests/testq13.sh
+          ./tests/testq14.sh
+          ./tests/testq15.sh
+          ./tests/testq16.sh
+          ./tests/testq17.sh
+          ./tests/testq18.sh
+          ./tests/testq19.sh
+          ./tests/testq20.sh
+          ./tests/testq21.sh
+          ./tests/testq22.sh
+          ./tests/testq23.sh
+          ./tests/testq24.sh
           ./tests/test_pdf.sh

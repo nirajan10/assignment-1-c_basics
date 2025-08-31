@@ -1,4 +1,4 @@
-// Write a C program to prompt the user for their name and display a personalized greeting message.
+// Write a C program to display a personalized greeting message. (Should contain 'hello' or 'welcome' in the message)
 
 #include <stdio.h>
 

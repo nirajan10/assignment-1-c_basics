@@ -3,6 +3,9 @@ set -e
 
 # Disallow loops or conditionals
 if grep -E "for|while|if" src/q14.c; then
+  echo "⚠️ Warning: Found 'if', 'for', or 'while' in the code."
+  echo "These may appear in comments, strings, or identifiers — please double-check."
+  echo "Remove comment and instance of 'if', 'for', or 'while' from the code."
   echo "❌ Q14 failed (loops/conditionals not allowed)"
   exit 1
 fi

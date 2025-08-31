@@ -26,23 +26,39 @@ jobs:
       - name: Run shell test scripts
         run: |
           chmod +x tests/*.sh
-          ./tests/testq3.sh
-          ./tests/testq6.sh
-          ./tests/testq8.sh
-          ./tests/testq9.sh
-          ./tests/testq10.sh
-          ./tests/testq11.sh
-          ./tests/testq12.sh
-          ./tests/testq13.sh
-          ./tests/testq14.sh
-          ./tests/testq15.sh
-          ./tests/testq16.sh
-          ./tests/testq17.sh
-          ./tests/testq18.sh
-          ./tests/testq19.sh
-          ./tests/testq20.sh
-          ./tests/testq21.sh
-          ./tests/testq22.sh
-          ./tests/testq23.sh
-          ./tests/testq24.sh
-          ./tests/test_pdf.sh
+          failed=0
+
+          for t in \
+            tests/testq3.sh \
+            tests/testq6.sh \
+            tests/testq8.sh \
+            tests/testq9.sh \
+            tests/testq10.sh \
+            tests/testq11.sh \
+            tests/testq12.sh \
+            tests/testq13.sh \
+            tests/testq14.sh \
+            tests/testq15.sh \
+            tests/testq16.sh \
+            tests/testq17.sh \
+            tests/testq18.sh \
+            tests/testq19.sh \
+            tests/testq20.sh \
+            tests/testq21.sh \
+            tests/testq22.sh \
+            tests/testq23.sh \
+            tests/testq24.sh \
+            tests/test_pdf.sh; do
+              echo "Running $t ..."
+              if ! $t; then
+                failed=1   # record failure but continue
+              fi
+              echo
+          done
+
+          if [ $failed -ne 0 ]; then
+            echo "❌ Some tests failed"
+            exit 1
+          else
+            echo "✅ All tests passed"
+          fi

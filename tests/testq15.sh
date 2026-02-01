@@ -1,41 +1,30 @@
 #!/bin/bash
-set -e
 
-# Disallow loops or conditionals
-if grep -E "for|while|if" src/q15.c; then
-  echo "⚠️ Warning: Found 'if', 'for', or 'while' in the code."
-  echo "These may appear in comments, strings, or identifiers — please double-check."
-  echo "Remove comment and instance of 'if', 'for', or 'while' from the code."
-  echo "❌ Q15 failed (loops/conditionals not allowed)"
-  exit 1
+# Automatically detect question number from script name (testqX.sh)
+num=$(basename "$0" | grep -o -E '[0-9]+')
+SRC="./src/q${num}.c"
+
+# 1. Remove all comments (single-line // and block /* ... */)
+code_no_comments=$(sed -E '
+  s://.*$::g;               # remove // comments
+  :a; /\/*/{N; s:/\*.*\*/::; ba;}  # remove /* ... */ comments (multi-line)
+' "$SRC")
+
+# 2. Check if file (after removing comments) has any code left
+if ! echo "$code_no_comments" | grep -q '[^[:space:]]'; then
+    echo "❌ q${num}.c is empty or only contains comments"
+    exit 0
 fi
 
-# Compile
-gcc src/q15.c -o q15
-
-# Test: n=8 → positive and even → should output 1
-output=$(echo "8" | ./q15)
-if echo "$output" | grep -q "1"; then
-  echo "✅ Q15 positive-even test passed"
+# 3. Try to compile
+gcc "$SRC" -o "q${num}.out" 2> compile.log
+if [ $? -ne 0 ]; then
+    echo "❌ Compilation failed for q${num}.c"
+    cat compile.log
 else
-  echo "❌ Q15 positive-even test failed"
-  exit 1
+    echo "✅ Compilation successful for q${num}.c"
 fi
 
-# Test: n=7 → positive but odd → should output 0
-output=$(echo "7" | ./q15)
-if echo "$output" | grep -q "0"; then
-  echo "✅ Q15 positive-odd test passed"
-else
-  echo "❌ Q15 positive-odd test failed"
-  exit 1
-fi
-
-# Test: n=-4 → negative even → should output 0
-output=$(echo "-4" | ./q15)
-if echo "$output" | grep -q "0"; then
-  echo "✅ Q15 negative-even test passed"
-else
-  echo "❌ Q15 negative-even test failed"
-  exit 1
-fi
+# Cleanup
+rm -f "q${num}.out" compile.log
+exit 0

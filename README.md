@@ -2,10 +2,10 @@
 
 ## Instructions
 
-1. Upload a PDF containing all theory questions (if any) and answers in the docs/ folder
-    - You can create a doc and convert it to PDF online.
-    - Name pdf as `answer.pdf`
-    - Your first line of pdf should be `Name: Firstname-Lastname`. Eg: Name: Nirajan-Thakuri
+1. Upload a `PDF` containing all answers with output screenshot in the docs/ folder
+   - You can create a doc and convert it to PDF online.
+   - Name pdf as `answer.pdf`
+   - Your first line of pdf should be `Name: Firstname-Lastname`. Eg: Name: Nirajan-Thakuri
 
 2. Write code in the corresponding `src/` file for each programming task.
 
@@ -64,9 +64,5 @@
 **Q23.** Given a variable num, write an expression that checks if it is a power of 2.
 
 **Q24.** Create an expression that checks if a given number is a perfect square.
-
----
-
-## Deadline: 23:59, Thursday, 28th Aug, 2025
 
 ---

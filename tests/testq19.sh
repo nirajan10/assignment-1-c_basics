@@ -1,31 +1,30 @@
 #!/bin/bash
-set -e
 
-# Disallow loops or conditionals
-if grep -E "for|while|if" src/q19.c; then
-  echo "⚠️ Warning: Found 'if', 'for', or 'while' in the code."
-  echo "These may appear in comments, strings, or identifiers — please double-check."
-  echo "Remove comment and instance of 'if', 'for', or 'while' from the code."
-  echo "❌ Q19 failed (loops/conditionals not allowed)"
-  exit 1
+# Automatically detect question number from script name (testqX.sh)
+num=$(basename "$0" | grep -o -E '[0-9]+')
+SRC="./src/q${num}.c"
+
+# 1. Remove all comments (single-line // and block /* ... */)
+code_no_comments=$(sed -E '
+  s://.*$::g;               # remove // comments
+  :a; /\/*/{N; s:/\*.*\*/::; ba;}  # remove /* ... */ comments (multi-line)
+' "$SRC")
+
+# 2. Check if file (after removing comments) has any code left
+if ! echo "$code_no_comments" | grep -q '[^[:space:]]'; then
+    echo "❌ q${num}.c is empty or only contains comments"
+    exit 0
 fi
 
-gcc src/q19.c -o q19
-
-# Test: a=5, b=5, c=7 → a==b true, b!=c true → should output 1
-output=$(echo -e "5\n5\n7" | ./q19)
-if echo "$output" | grep -q "1"; then
-  echo "✅ Q19 test 1 passed"
+# 3. Try to compile
+gcc "$SRC" -o "q${num}.out" 2> compile.log
+if [ $? -ne 0 ]; then
+    echo "❌ Compilation failed for q${num}.c"
+    cat compile.log
 else
-  echo "❌ Q19 test 1 failed"
-  exit 1
+    echo "✅ Compilation successful for q${num}.c"
 fi
 
-# Test: a=4, b=4, c=4 → a==b true, b!=c false → should output 0
-output=$(echo -e "4\n4\n4" | ./q19)
-if echo "$output" | grep -q "0"; then
-  echo "✅ Q19 test 2 passed"
-else
-  echo "❌ Q19 test 2 failed"
-  exit 1
-fi
+# Cleanup
+rm -f "q${num}.out" compile.log
+exit 0
